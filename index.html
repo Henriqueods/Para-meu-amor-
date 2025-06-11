@@ -1,1 +1,128 @@
 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Para o amor da minha vida</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+        body {
+            background: linear-gradient(to bottom, #2b2b2b, #1a1a1a);
+            color: #fff0f5;
+            font-family: 'Great Vibes', cursive;
+            text-align: center;
+            padding: 30px;
+        }
+        h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        p, h2 {
+            font-size: 24px;
+            margin: 10px auto;
+            max-width: 800px;
+        }
+        .audio-control {
+            margin: 20px;
+        }
+        .image-container {
+            margin-top: 40px;
+        }
+        .image-container img {
+            display: none;
+            width: 90%%;
+            max-width: 500px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 192, 203, 0.4);
+        }
+        #timer {
+            margin-top: 30px;
+            font-size: 20px;
+            color: #ffcad4;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+            border: none;
+            border-radius: 10px;
+            background-color: #ff5e78;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #ff2e53;
+        }
+    </style>
+</head>
+<body>
+    <h1>Para o amor da minha vida</h1>
+    <p>
+        Obrigado por quem você é comigo. Saiba que eu te amo muito, meu amor.
+        Você é o meu motivo de tudo na vida. Obrigado, meu amor.
+        Você é minha melhor memória, meu melhor sorriso, e claro, você é o meu amor.
+    </p>
+    <h2>Ligações de alma – parte do Baco Exu do Blues</h2>
+
+    <div class="audio-control">
+        <audio id="music" preload="auto">
+            <source src="ligacoes_de_alma_trecho.mp3" type="audio/mpeg">
+            Seu navegador não suporta áudio.
+        </audio>
+        <button onclick="playSegment()">▶️ Tocar música (trecho especial)</button>
+    </div>
+
+    <div class="image-container" id="photo-gallery">
+        <img src="foto1.jpg">
+        <img src="foto2.jpg">
+        <img src="foto3.jpg">
+        <img src="foto4.jpg">
+        <img src="foto5.jpg">
+    </div>
+
+    <div id="timer"></div>
+
+    <script>
+        // Reproduzir apenas o trecho da música
+        const audio = document.getElementById('music');
+        function playSegment() {
+            audio.currentTime = 96; // 1:36 em segundos
+            audio.play();
+        }
+        audio.addEventListener("timeupdate", function() {
+            if (audio.currentTime >= 150) { // 2:30 em segundos
+                audio.pause();
+                audio.currentTime = 96;
+            }
+        });
+
+        // Exibir fotos uma por uma
+        const images = document.querySelectorAll('#photo-gallery img');
+        let index = 0;
+        function showNextImage() {
+            if (index < images.length) {
+                images[index].style.display = 'block';
+                index++;
+                setTimeout(showNextImage, 2000);
+            }
+        }
+        showNextImage();
+
+        // Timer de relacionamento
+        const startDate = new Date('2023-12-08T00:00:00');
+        const timerElement = document.getElementById('timer');
+        function updateTimer() {
+            const now = new Date();
+            const diff = now - startDate;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+            timerElement.textContent = `Estamos juntos há ${days} dias, ${hours}h ${minutes}m ${seconds}s`;
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+    </script>
+</body>
+</html>
